@@ -76,6 +76,3 @@ Exemple
 >> printf("[%#.10x]", 57483)
 >> [0x000000e08b] // -> length = 14 (with brackets)
 ```
-
-# TODO
-- GERER LE FLAG 0 POUR X DI !!!!!!!!!!!!! (important) (urgent) (il faut vrmt le faire) (pour aujourd'hui)
