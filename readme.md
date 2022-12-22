@@ -1,3 +1,13 @@
+# README - Printf
+
+## Files
+
+- ft_printf_<letter>.c : files specific to a certain type <letter>
+- ft_printf_utils.c : useful functions
+- ft_printf.c : analysis of the string
+
+## Special features of this version of printf
+
 # flag "0"
     - types : d, i, u, x, X
     - pad the number with zeros
@@ -75,4 +85,11 @@ Exemple
 ```c
 >> printf("[%#.10x]", 57483)
 >> [0x000000e08b] // -> length = 14 (with brackets)
+```
+
+## Run the project
+
+Simply do:
+```sh
+make && gcc libftprintf.a <your_test_file>.c && ./a.out
 ```
