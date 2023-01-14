@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf_u.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ejankovs <ejankovs@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/19 08:54:41 by ejankovs          #+#    #+#             */
+/*   Updated: 2023/01/14 17:29:23 by ejankovs         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/ft_printf.h"
 
 static int	ft_nblen(unsigned int n)
@@ -22,7 +34,7 @@ static void	ft_putnb(unsigned int n, char *str, int pos)
 	str[pos] = n % 10 + '0';
 }
 
-static char	*ft_itoa(unsigned int n)
+static char	*ft_itoa(unsigned int n, t_flags flags)
 {
 	char			*str;
 	int				len;
@@ -31,6 +43,8 @@ static char	*ft_itoa(unsigned int n)
 	str = (char *)malloc(sizeof(char) * (len + 1));
 	if (!str)
 		return (NULL);
+	if (n == 0 && flags.point == 0)
+		return (str[0] = '\0', str);
 	str[len] = '\0';
 	ft_putnb(n, str, len - 1);
 	return (str);
@@ -45,7 +59,7 @@ int	ft_printf_u(va_list *argc, t_flags flags)
 	int				zeros;
 
 	value = va_arg(*argc, int);
-	nbr = ft_itoa(value);
+	nbr = ft_itoa(value, flags);
 	length = max(ft_strlen(nbr), max(flags.point, flags.minimal_length));
 	zeros = calcul_zeros(flags.point, ft_strlen(nbr));
 	spaces = length - ft_strlen(nbr) - zeros;

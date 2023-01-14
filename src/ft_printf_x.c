@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf_x.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ejankovs <ejankovs@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/19 08:54:52 by ejankovs          #+#    #+#             */
+/*   Updated: 2023/01/14 17:47:46 by ejankovs         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/ft_printf.h"
 
 int	calcul_zeros(int a, int b)
@@ -22,7 +34,7 @@ static void	put_hexa(unsigned int nb, int base, char *res, int i)
 	}
 }
 
-static char	*convert_nb(unsigned int nb, int base)
+static char	*convert_nb(unsigned int nb, int base, t_flags flags)
 {
 	int				i;
 	unsigned int	nbr;
@@ -37,6 +49,8 @@ static char	*convert_nb(unsigned int nb, int base)
 		res = malloc(sizeof(char) * 2);
 		if (!res)
 			return (NULL);
+		if (flags.point == 0)
+			return (res[0] = '\0', res);
 		res[0] = '0';
 		res[1] = '\0';
 		return (res);
@@ -58,10 +72,10 @@ int	ft_printf_x(va_list *argc, t_flags flags, int base)
 	int				zeros;
 
 	value = va_arg(*argc, unsigned int);
-	nbr = convert_nb(value, base);
+	nbr = convert_nb(value, base, flags);
 	length = max(ft_strlen(nbr) + (flags.diese && value) * 2, max(flags.point
 				+ (flags.diese && value) * 2,
-				flags.minimal_length - 2 * (!value)));
+				flags.minimal_length - 2 * (flags.diese && value)));
 	zeros = calcul_zeros(flags.point, ft_strlen(nbr));
 	spaces = length - (ft_strlen(nbr) + (flags.diese && value) * 2) - zeros;
 	while (spaces-- > 0 && !flags.tiret)
