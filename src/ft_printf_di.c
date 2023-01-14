@@ -6,7 +6,7 @@
 /*   By: ejankovs <ejankovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 08:53:34 by ejankovs          #+#    #+#             */
-/*   Updated: 2023/01/14 17:59:06 by ejankovs         ###   ########.fr       */
+/*   Updated: 2023/01/14 18:23:29 by ejankovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	ft_printf_di(va_list *argc, t_flags flags)
 	if (v < 0 && flags.zero)
 		write(1, "-", 1);
 	while (spaces-- > 0 && !flags.tiret)
-		write(1, &" 0"[flags.zero - (v == 0 && flags.point == 0 && flags.zero)], 1);
+		write(1, &" 0"[flags.zero - (!v && !flags.point && flags.zero)], 1);
 	if (flags.plus && v >= 0)
 		write(1, "+", 1);
 	else if (flags.espace && v >= 0)

@@ -6,7 +6,7 @@
 /*   By: ejankovs <ejankovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 08:54:59 by ejankovs          #+#    #+#             */
-/*   Updated: 2022/12/19 08:55:00 by ejankovs         ###   ########.fr       */
+/*   Updated: 2023/01/14 18:20:09 by ejankovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ void	ft_flags(const char **format, t_flags *flags)
 		++*format;
 	}
 	flags->type = **format;
+	if (flags->zero == 1 && flags->point >= 0)
+		flags->zero = 0;
 	++*format;
 }
 

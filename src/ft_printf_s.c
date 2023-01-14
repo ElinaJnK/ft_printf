@@ -6,7 +6,7 @@
 /*   By: ejankovs <ejankovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 08:54:35 by ejankovs          #+#    #+#             */
-/*   Updated: 2022/12/19 16:29:34 by ejankovs         ###   ########.fr       */
+/*   Updated: 2023/01/14 18:22:51 by ejankovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static int	null_string(t_flags flags)
 {
-	//int		string_length;
 	int		total_length;
 	int		spaces;
 
@@ -29,7 +28,7 @@ static int	null_string(t_flags flags)
 			write(1, " ", 1);
 		return (total_length);
 	}
-	return(0);
+	return (0);
 }
 
 int	ft_printf_s(va_list *argc, t_flags flags)
