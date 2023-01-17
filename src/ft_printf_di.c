@@ -6,13 +6,13 @@
 /*   By: ejankovs <ejankovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 08:53:34 by ejankovs          #+#    #+#             */
-/*   Updated: 2023/01/14 18:23:29 by ejankovs         ###   ########.fr       */
+/*   Updated: 2023/01/17 16:10:59 by ejankovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
 
-static void	print_multi(int n, char c)
+static void	pm(int n, char c)
 {
 	while (n-- > 0)
 		write(1, &c, 1);
@@ -61,7 +61,7 @@ static char	*ft_itoa(int n, t_flags flags)
 	return (str);
 }
 
-int	ft_printf_di(va_list *argc, t_flags flags)
+int	ft_printf_di(va_list *argc, t_flags f)
 {
 	int		v;
 	char	*nbr;
@@ -70,22 +70,22 @@ int	ft_printf_di(va_list *argc, t_flags flags)
 	int		zeros;
 
 	v = va_arg(*argc, int);
-	nbr = ft_itoa(v, flags);
-	l = max(ft_strlen(nbr), max(flags.point, flags.minimal_length - (v < 0)));
-	zeros = calcul_zeros(flags.point, ft_strlen(nbr));
+	nbr = ft_itoa(v, f);
+	l = max(ft_strlen(nbr), max(f.point, f.minimal_length
+				- (v < 0) - (v > 0 && (f.espace || f.plus))));
+	zeros = calcul_zeros(f.point, ft_strlen(nbr));
 	spaces = l - ft_strlen(nbr) - zeros;
-	if (v < 0 && flags.zero)
+	if (v < 0 && f.zero)
 		write(1, "-", 1);
-	while (spaces-- > 0 && !flags.tiret)
-		write(1, &" 0"[flags.zero - (!v && !flags.point && flags.zero)], 1);
-	if (flags.plus && v >= 0)
+	while (spaces-- > 0 && !f.tiret)
+		write(1, &" 0"[f.zero - (!v && !f.point && f.zero)], 1);
+	if (f.plus && v >= 0)
 		write(1, "+", 1);
-	else if (flags.espace && v >= 0)
+	else if (f.espace && v >= 0)
 		write(1, " ", 1);
-	else if (v < 0 && !flags.zero)
+	else if (v < 0 && !f.zero)
 		write(1, "-", 1);
-	print_multi(zeros, '0');
+	pm(zeros, '0');
 	write(1, nbr, ft_strlen(nbr));
-	print_multi(spaces + 1, ' ');
-	return (free(nbr), l + (flags.plus || flags.espace || v < 0));
+	return (pm(spaces + 1, ' '), free(nbr), l + (f.plus || f.espace || v < 0));
 }
