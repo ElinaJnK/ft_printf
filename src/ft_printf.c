@@ -6,7 +6,7 @@
 /*   By: ejankovs <ejankovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 08:54:59 by ejankovs          #+#    #+#             */
-/*   Updated: 2023/01/14 18:20:09 by ejankovs         ###   ########.fr       */
+/*   Updated: 2023/01/17 14:14:55 by ejankovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ int	ft_printf(const char *format, ...)
 	char	c;
 
 	nbchar = 0;
+	if (!format)
+		return (-1);
 	va_start(args, format);
 	while (*format)
 	{
